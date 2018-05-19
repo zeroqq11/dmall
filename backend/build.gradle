@@ -1,0 +1,64 @@
+buildscript {
+    project.ext {
+        bootVersion = '1.5.9.RELEASE'
+
+    }
+
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.bootVersion}"
+        classpath "org.springframework.cloud:spring-cloud-contract-gradle-plugin:1.2.1.RELEASE"
+        classpath "org.flywaydb:flyway-gradle-plugin:3.1"
+    }
+}
+
+plugins{
+    id "org.flywaydb.flyway" version "4.2.0"
+}
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "flyway"
+apply plugin: "org.springframework.boot"
+apply plugin: "io.spring.dependency-management"
+apply plugin: "spring-cloud-contract"
+apply plugin: "groovy"
+apply plugin: 'maven'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+sourceCompatibility = 1.8
+
+ext {
+    springCloudVersion = 'Edgware.RELEASE'
+}
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('org.springframework.boot:spring-boot-starter-data-rest')
+    compile('org.springframework.boot:spring-boot-devtools')
+    compile('mysql:mysql-connector-java:5.1.6')
+    compile('org.apache.httpcomponents:httpclient:4.4')
+    compile('org.apache.httpcomponents:httpmime:4.4')
+    compile('org.json:json:20140107')
+    compile('io.jsonwebtoken:jjwt:0.9.0')
+
+    compile group: 'com.fasterxml.jackson.jaxrs', name: 'jackson-jaxrs-xml-provider', version: '2.5.0'
+    compile 'com.alibaba:fastjson:1.2.44'
+
+    compile "org.flywaydb:flyway-core:5.0.6"
+}
+
+
+bootRun {
+    addResources = true
+}
